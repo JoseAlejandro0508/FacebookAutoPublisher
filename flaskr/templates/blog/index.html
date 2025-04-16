@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Accounts{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('blog.create') }}">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for post in posts %}
+    <article class="post">
+      <header>
+        <div>
+          <h1>{{ post['accUsername'] }}</h1>
+          <div class="about">CookieName{{ post['accCookieName'] }}</div>  
+          <div class="about">{{ post['created'].strftime('%Y-%m-%d') }}</div>
+        </div>
+
+        <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
+        <a class="action" href="{{ url_for('blog.config', id=post['id']) }}">Config</a>
+        <a class="action" href="{{ url_for('blog.send', id=post['id']) }}">Send</a>
+        <a class="action" href="{{ url_for('blog.share', id=post['id']) }}">Share</a>
+        <a class="action" href="{{ url_for('blog.share', id=post['id']) }}">Logs</a>
+
+      </header>
+      
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

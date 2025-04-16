@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Logs {{pos["accUsername"]}}{% endblock %}</h1>
+  <h1>{% if state %}
+        Ejecutando Proceso..
+
+    {% endif %} 
+</h1>
+{% endblock %}
+
+{% block content %}
+  {% for log in posts["logs"].split("\n")%}
+    <article class="post">
+      <header>
+        <div>
+          <div class="about">{{ log }}</div>  
+        </div>
+      </header>
+      
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+{% endblock %}

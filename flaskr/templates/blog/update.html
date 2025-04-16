@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Edit {{ post['accUsername'] }}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    <label for="title">CookieName</label>
+    <input name="CookieName" id="CookieName"] value="{{ post['accCookieName']}}" required>
+    <label for="title">Account Username</label>
+    <input name="AccUser" id="AccUser"value="{{ post['accUsername'] }}" required>
+    <label for="title">Account Password</label>
+    <input name="AccPass" id="AccPass" value="{{ post['accPassword'] }}" >
+    <label for="Cockie">Archivo coockie</label>
+    <input type="file" name="file" accept=".pkl" required>
+    <input type="submit" value="Save">
+  </form>
+  <hr>
+  <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+  </form>
+{% endblock %}

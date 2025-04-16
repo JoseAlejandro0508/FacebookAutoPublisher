@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Config Account "{{ post['accUsername'] }}"{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+    <label>Publications to Compart URL List</label>
+    <textarea name="publication"  >{{ publications}}</textarea>
+    <label>Groups URL List</label>
+    <textarea name="groups">{{ groups }}</textarea>
+    <textarea name="text">{{ post['publicationText'] }}</textarea>
+
+    <input type="submit" value="Save">
+  </form>
+
+{% endblock %}

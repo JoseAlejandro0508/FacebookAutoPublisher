@@ -1,0 +1,5 @@
+sessions_/
+chrome-win64/
+chromedriver.exe
+flaskr/__pycache__/
+*.pyc

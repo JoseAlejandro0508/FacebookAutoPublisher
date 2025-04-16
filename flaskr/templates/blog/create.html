@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}New account{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <form method="post" enctype="multipart/form-data">
+    <label for="title">CookieName</label>
+    <input name="CookieName" id="CookieName"] value="{{ request.form['CokkieName'] }}" required>
+    <label for="title">Account Username</label>
+    <input name="AccUser" id="AccUser"value="{{ request.form['AccUser'] }}" required>
+    <label for="title">Account Password</label>
+    <input name="AccPass"" id="AccPass" value="{{ request.form['AccPass'] }}" >
+    <label for="Cockie">Archivo cockie</label>
+    <input type="file" name="file" accept=".pkl" required>
+    <input type="submit" value="Save">
+  </form>
+{% endblock %}
