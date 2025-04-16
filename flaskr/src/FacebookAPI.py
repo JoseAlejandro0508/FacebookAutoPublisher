@@ -22,20 +22,19 @@ class API:
         CookiesRoute="sessions",
         multitasks=100,
         dbConnection=None,
-        service_=Service("chromedriver.exe")
+        service_=Service(ChromeDriverManager().install()),
     ):
-        if False:
-            service_=Service(ChromeDriverManager().install())
+
         self.CookiesRoute = CookiesRoute
         self.Threads = []
         self.MultiTasks = Semaphore(multitasks)
         self.dbConnection = dbConnection
 
         self.edge_options = Options()
-       
-        self.edge_options.binary_location = "chrome-win64/chrome.exe"
+
+        # self.edge_options.binary_location = "chrome-win64/chrome.exe"
         self.service = service_
-        
+
         if invisible:
             self.edge_options.add_argument("--headless")  # Ejecutar en modo headless
             self.edge_options.add_argument(
@@ -122,7 +121,7 @@ class API:
                 "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
             )
             driver.get("https://facebook.com/")
-            with open(f"flaskr/sessions/{user}.pkl", "rb") as file:
+            with open(f"{self.CookiesRoute}{user}.pkl", "rb") as file:
                 cookies = pickle.load(file)
                 for cookie in cookies:
 
@@ -296,6 +295,7 @@ class API:
         endTime = time.time()
         totalTime = endTime - startTime
         logs += f"\n\nProceso terminado  en {totalTime} segundos"
+        print(logs)
         if not self.dbConnection:
             return
         try:
@@ -332,6 +332,7 @@ class API:
         endTime = time.time()
         totalTime = endTime - startTime
         logs += f"\n\nProceso terminado  en {totalTime} segundos"
+        print(logs)
         if not self.dbConnection:
             return
         try:
@@ -351,12 +352,10 @@ class API:
         task.start()
         # self.Threads.append(task)
 
-    def CheckThreadState(self,id):
+    def CheckThreadState(self, id):
         hilos_actuales = threading.enumerate()
 
         for hilo in hilos_actuales:
             if hilo.name == id:
                 return True
         return False
-api=API()
-api.GetCookiesManual("59642893","asas")

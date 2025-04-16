@@ -11,7 +11,10 @@ from flaskr.src.FacebookAPI import API
 api = API(dbConnection=sqlite3.connect(
             "instance/flaskr.sqlite", detect_types=sqlite3.PARSE_DECLTYPES,
             
-        )
+        ),
+        CookiesRoute="flaskr/sessions",
+        invisible=True
+          
     )
 
 bp = Blueprint("blog", __name__)
